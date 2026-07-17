@@ -1,0 +1,26 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+source: https://ai.paytabs.com/en/security-compliance/
+url: https://ai.paytabs.com/en/security-compliance/
+certifications:
+- PCI DSS Level 1
+- EMV 3-D Secure 2 (Modirum)
+- mada / Saudi National Payment Gateway certified
+evidence:
+- source: https://ai.paytabs.com/en/security-compliance/
+  keywords:
+  - pci dss level 1
+  - 3d secure
+  - tokenization
+  - fraud
+- source: https://support.paytabs.com/en/support/solutions/articles/60000709976-what-is-pci-dss-and-what-are-the-merchant-requirements-
+  keywords:
+  - pci dss
+  - merchant requirements
+notes: >-
+  PayTabs is PCI DSS Level 1 certified for card processing. It was the first to
+  deploy Modirum EMV 3-D Secure within Saudi Arabia and is certified for the
+  Saudi national payment scheme (mada). PayTabs has no dedicated public trust
+  portal; compliance is documented across ai.paytabs.com/en/security-compliance
+  and the support portal.

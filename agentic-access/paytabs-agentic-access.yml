@@ -1,0 +1,52 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/paytabs-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents - review and bind
+  audience per deployment. Payment operations move real money; write actions default to
+  human-in-the-loop required. See research/curity/agentic-governance/.
+summary:
+  operations: 2
+  by_action_class:
+    acting: 1
+    connected: 1
+  by_consequence:
+    write: 1
+    read: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /payment/request
+  method: post
+  operationId: createPaymentRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - always
+      - high-value
+      - abnormal
+    audit: required
+    notes: >-
+      Moves money - creates sales/authorizations and performs capture, void,
+      release and refund via tran_type. Treat as a high-consequence financial
+      write; require human approval and full audit. Refund/void especially
+      should never be fully autonomous.
+- path: /payment/query
+  method: post
+  operationId: queryTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 900
+    audit: required
+    notes: >-
+      Read-only transaction lookup, but returns cardholder/customer PII and
+      payment details; keep audit on and restrict audience.

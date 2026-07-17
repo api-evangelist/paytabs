@@ -1,0 +1,42 @@
+generated: '2026-07-17'
+method: probed
+source: live HTTP probes of apis.yml + OpenAPI region hosts
+notes: >-
+  PayTabs serves the PT2 REST API on region-specific hosts. The `secure*` hosts
+  redirect (301) plain GETs but terminate TLS and serve the documented POST
+  endpoints. Using the wrong region host for a given profile/key causes
+  authentication (401) errors per PayTabs documentation.
+hosts:
+- host: paytabs.com
+  https: true
+  http_status: 200
+- host: secure.paytabs.com
+  https: true
+  http_status: 301
+  region: UAE / default
+- host: secure.paytabs.sa
+  https: true
+  http_status: 301
+  region: Saudi Arabia (KSA)
+- host: secure-egypt.paytabs.com
+  https: true
+  http_status: 301
+  region: Egypt
+- host: docs.paytabs.com
+  https: true
+  region: Technical portal
+region_hosts:
+- secure.paytabs.com
+- secure.paytabs.sa
+- secure-egypt.paytabs.com
+- secure-oman.paytabs.com
+- secure-jordan.paytabs.com
+- secure-kuwait.paytabs.com
+- secure-iraq.paytabs.com
+- secure-morocco.paytabs.com
+- secure-doha.paytabs.com
+- secure-global.paytabs.com
+transport_security:
+  tls: true
+  pci_dss: PCI DSS Level 1 (card processing)
+  three_d_secure: EMV 3-D Secure 2 (via Modirum), first deployment in KSA

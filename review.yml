@@ -1,0 +1,72 @@
+aid: paytabs
+name: PayTabs
+review:
+  question: Does PayTabs expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. PayTabs PT2 is a request/response REST
+    API over HTTPS. Its only asynchronous surface is the server-to-server IPN
+    (Instant Payment Notification) callback - an HTTP POST that PayTabs sends to
+    the merchant's `callback` URL after a transaction settles. That is a
+    conventional webhook, not a WebSocket or an SSE stream, so it falls outside
+    the current AsyncAPI modeling scope (which admits WebSocket and HTTP SSE).
+findings:
+  summary: |
+    PayTabs does not publish a documented public WebSocket API. The PT2
+    platform exposes only REST (HTTPS) endpoints - POST /payment/request and
+    POST /payment/query - on region-specific hosts. Post-payment updates are
+    delivered as an HTTP POST IPN callback (webhook) to the merchant's
+    `callback` URL, plus a browser `return` redirect. No realtime,
+    bidirectional, or streaming ws:// or wss:// endpoint is documented for any
+    PayTabs product.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://secure.paytabs.com
+      documented: true
+    - protocol: Webhook (IPN callback)
+      scheme: https
+      note: PayTabs POSTs transaction results to the merchant-supplied `callback` URL. Server-to-server HTTP webhook, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the PayTabs technical portal, developer site, or PT2 Postman collection as of the review date.
+  endpointsConfirmedRest:
+    - POST https://secure.paytabs.com/payment/request
+    - POST https://secure.paytabs.com/payment/query
+  regionHosts:
+    - secure.paytabs.com (UAE / default)
+    - secure.paytabs.sa (Saudi Arabia)
+    - secure-egypt.paytabs.com (Egypt)
+    - secure-oman.paytabs.com (Oman)
+    - secure-jordan.paytabs.com (Jordan)
+    - secure-kuwait.paytabs.com (Kuwait)
+    - secure-iraq.paytabs.com (Iraq)
+    - secure-morocco.paytabs.com (Morocco)
+    - secure-doha.paytabs.com (Qatar)
+    - secure-global.paytabs.com (Global)
+sources:
+  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
+    type: Documentation
+    note: PT2 API endpoint index; all documented endpoints are HTTPS REST.
+  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/
+    type: Documentation
+    note: POST /payment/request; returns hosted redirect_url. No WebSocket.
+  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/
+    type: Documentation
+    note: POST /payment/query for status; polled, not streamed.
+  - url: https://support.paytabs.com/en/support/solutions/articles/60000718070-what-is-my-region-endpoint-url-
+    type: Documentation
+    note: Region-to-host mapping for the REST endpoints.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: false
+  reason: |
+    No WebSocket or SSE surface exists. The only asynchronous mechanism is an
+    HTTP IPN webhook to the merchant callback URL, which is out of AsyncAPI
+    scope, so no AsyncAPI document was created and no AsyncAPI pointer was added
+    to apis.yml.

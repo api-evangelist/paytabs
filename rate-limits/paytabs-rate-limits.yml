@@ -1,0 +1,50 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: PayTabs
+providerId: paytabs
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- MENA
+- Rate Limiting
+- Throttling
+description: >-
+  PayTabs does not publish explicit numeric API rate limits (RPM/RPD) for the
+  PT2 REST API. As a card acquirer, throughput is governed by risk, fraud, and
+  velocity controls at the profile/merchant level rather than a public developer
+  quota. Abusive or abnormal request patterns may be throttled or blocked.
+  Clients should implement retries with backoff and rely on the idempotency of
+  cart_id / tran_ref plus /payment/query to reconcile rather than blindly retry
+  /payment/request.
+notes: >-
+  No public rate-limit table is documented. Values are risk-managed and
+  merchant-specific; confirm any hard limits with PayTabs support during
+  reconciliation.
+sources:
+- https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
+- https://support.paytabs.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: Request throughput
+  scope: profile
+  metric: requests
+  limit: not publicly documented (risk/velocity managed)
+  notes: Governed by fraud/velocity controls per merchant profile, not a published quota.
+- name: Transaction velocity
+  scope: merchant
+  metric: transactions
+  limit: risk-based
+  notes: Unusual volume or value may trigger review, hold, or decline.
+policies:
+- name: Backoff Strategy
+  description: Use exponential backoff with jitter; honor Retry-After on 429.
+- name: Safe Retries
+  description: Reconcile with POST /payment/query on the same cart_id/tran_ref before retrying a payment to avoid duplicate charges.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

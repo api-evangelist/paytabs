@@ -1,0 +1,30 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/paytabs-openapi.yml
+summary:
+  types:
+  - apiKey
+notes: >-
+  PayTabs PT2 authenticates server-to-server calls with a merchant server key
+  sent as the raw value of the `authorization` HTTP header (NOT an OAuth/Bearer
+  token). The `profile_id` in the request body identifies which profile the
+  server key acts on. A separate client key is used for browser-side own-form /
+  tokenization. Keys are region-scoped: a key must be used against the host that
+  matches its region (e.g. secure.paytabs.sa for KSA) or authentication fails.
+schemes:
+- name: server_key
+  type: apiKey
+  in: header
+  header: authorization
+  format: server key (e.g. SXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXX)
+  sources:
+  - openapi/paytabs-openapi.yml
+  - https://support.paytabs.com/en/support/solutions/articles/60000709801-how-to-get-my-authentication-integration-api-keys-
+- name: client_key
+  type: apiKey
+  in: header
+  header: client key
+  format: CXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXX
+  usage: Browser-side own-form and card tokenization; paired with profile_id.
+  sources:
+  - https://support.paytabs.com/en/support/solutions/articles/60000709773-authentication-integration-api-keys

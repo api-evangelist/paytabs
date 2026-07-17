@@ -1,0 +1,90 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: PayTabs
+providerId: paytabs
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- Fintech
+- MENA
+- Plans
+description: >-
+  PayTabs is priced as a merchant acquirer, not as a metered developer API.
+  There is no per-API-call fee; merchants pay a per-transaction merchant
+  discount rate (a percentage, sometimes plus a fixed per-transaction fee) that
+  varies by country, card scheme, and negotiated volume, and in some markets a
+  one-time setup and/or annual fee. The API itself is included with a merchant
+  account. Exact rates are quoted per merchant and per region and are not
+  published as a single global rate card.
+notes: >-
+  Rates are country- and negotiation-specific; the entries below describe the
+  pricing MODEL, not confirmed universal numbers. Confirm live rates on the
+  PayTabs regional pricing pages or via a sales quote during reconciliation.
+sources:
+- https://paytabs.com/en/
+- https://ai.paytabs.com/en/payment-gateway-apis/
+- https://support.paytabs.com/
+plans:
+- id: paytabs-merchant-transaction
+  name: Merchant Transaction Pricing
+  type: usage
+  description: >-
+    Per-transaction merchant discount rate charged on successful payments;
+    percentage varies by region, method, and volume. API access is included.
+  entries:
+  - label: Card / wallet transaction fee
+    name: transaction_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: regional
+    unit: 1
+    price: percentage MDR per transaction (region/scheme/volume dependent - quoted)
+    userMultiplied: false
+  - label: Setup / onboarding fee
+    name: setup_fee
+    type: flat
+    metric: account
+    limit: 1
+    timeFrame: once
+    geo: regional
+    unit: 1
+    price: one-time (region dependent; may be waived)
+    userMultiplied: false
+  elements:
+  - name: Hosted Payment Page
+  - name: Managed Form
+  - name: Own Form
+  - name: Token & Recurring Billing
+  - name: Invoices
+  - name: Transaction Management (query/capture/void/refund)
+- id: paytabs-enterprise
+  name: Enterprise / Orchestration
+  type: enterprise
+  description: >-
+    Negotiated pricing for high-volume merchants, payment orchestration,
+    multi-acquirer routing, and PayTabs' broader fintech services. Contact
+    PayTabs sales.
+  entries:
+  - label: Negotiated Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: regional
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Payment Orchestration
+  - name: Multi-acquirer Routing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "PayTabs PT2 API",
+    "description": "PayTabs PT2 REST API - modeled from docs.paytabs.com and the public PT2 Direct APIs reference. Set {{baseUrl}} to the region host that matches your profile (e.g. https://secure.paytabs.com for UAE, https://secure.paytabs.sa for KSA). Set {{server_key}} to your merchant server key and {{profile_id}} to your profile ID.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://secure.paytabs.com"
+    },
+    {
+      "key": "server_key",
+      "value": "SXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXX"
+    },
+    {
+      "key": "profile_id",
+      "value": "12345"
+    }
+  ],
+  "item": [
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Hosted Payment Page (sale)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"sale\",\n  \"tran_class\": \"ecom\",\n  \"cart_id\": \"cart_11111\",\n  \"cart_description\": \"Order 11111\",\n  \"cart_currency\": \"SAR\",\n  \"cart_amount\": 100.50,\n  \"callback\": \"https://merchant.example.com/paytabs/ipn\",\n  \"return\": \"https://merchant.example.com/paytabs/return\",\n  \"payment_methods\": [\"creditcard\", \"mada\", \"applepay\"],\n  \"customer_details\": {\n    \"name\": \"Sara Ahmed\",\n    \"email\": \"sara@example.com\",\n    \"phone\": \"+966500000000\",\n    \"street1\": \"King Fahd Rd\",\n    \"city\": \"Riyadh\",\n    \"state\": \"Riyadh\",\n    \"country\": \"SA\",\n    \"zip\": \"11564\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Authorize (auth) with tokenization",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"auth\",\n  \"tran_class\": \"ecom\",\n  \"cart_id\": \"cart_22222\",\n  \"cart_description\": \"Order 22222\",\n  \"cart_currency\": \"AED\",\n  \"cart_amount\": 250.00,\n  \"tokenise\": 2,\n  \"show_save_card\": true,\n  \"return\": \"https://merchant.example.com/paytabs/return\",\n  \"callback\": \"https://merchant.example.com/paytabs/ipn\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Token & Recurring",
+      "item": [
+        {
+          "name": "Recurring charge with saved token",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"sale\",\n  \"tran_class\": \"recurring\",\n  \"cart_id\": \"sub_33333\",\n  \"cart_description\": \"Monthly subscription\",\n  \"cart_currency\": \"SAR\",\n  \"cart_amount\": 49.00,\n  \"token\": \"2C6B29CCE1C25A5A4E71D4AA5A0D0000\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Query by transaction reference",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/query",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "query"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_ref\": \"TST2100000000001\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Query by cart id",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/query",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "query"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"cart_id\": \"cart_11111\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Capture a prior authorization",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"capture\",\n  \"tran_class\": \"ecom\",\n  \"cart_id\": \"cart_22222\",\n  \"cart_description\": \"Capture for order 22222\",\n  \"cart_currency\": \"AED\",\n  \"cart_amount\": 250.00,\n  \"tran_ref\": \"TST2100000000002\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Refund a transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"refund\",\n  \"tran_class\": \"ecom\",\n  \"cart_id\": \"cart_11111\",\n  \"cart_description\": \"Refund for order 11111\",\n  \"cart_currency\": \"SAR\",\n  \"cart_amount\": 100.50,\n  \"tran_ref\": \"TST2100000000001\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Void a transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authorization", "value": "{{server_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment/request",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"profile_id\": \"{{profile_id}}\",\n  \"tran_type\": \"void\",\n  \"tran_class\": \"ecom\",\n  \"cart_id\": \"cart_22222\",\n  \"cart_description\": \"Void order 22222\",\n  \"cart_currency\": \"AED\",\n  \"cart_amount\": 250.00,\n  \"tran_ref\": \"TST2100000000002\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

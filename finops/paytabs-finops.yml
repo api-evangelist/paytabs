@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: PayTabs
+providerId: paytabs
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- MENA
+- FinOps
+- Cost Management
+description: >-
+  FinOps view of PayTabs spend. Unlike metered API providers, PayTabs cost is
+  driven by payment-acceptance economics: a per-transaction merchant discount
+  rate (percentage, sometimes plus a fixed fee) that varies by region, card
+  scheme and negotiated volume, optional setup/annual fees, plus operational
+  costs from refunds, chargebacks and currency conversion. Settlement currency
+  and rate depend on the region host and acquiring setup.
+notes: >-
+  Pricing is regional and quote-based; there is no single global rate card.
+  Model cost against actual per-region MDR and transaction mix during
+  reconciliation.
+sources:
+- https://paytabs.com/en/
+- https://ai.paytabs.com/en/payment-gateway-apis/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: PayTabs
+serviceCategory: Payment Processing
+billingModel:
+  pricingCategory: Transaction-Based
+  billingFrequency: Per-settlement / Monthly
+  billingCurrency: Regional (SAR, AED, EGP, USD, etc.)
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: PayTabs PT2
+  ServiceCategory: Payment Processing
+  ProviderName: PayTabs
+  PublisherName: PayTabs
+  InvoiceIssuerName: PayTabs
+  BillingCurrency: Regional
+  ChargeCategory: Usage
+  PricingCategory: Transaction-Based
+meters:
+- name: transaction_fee
+  description: Merchant discount rate charged per successful transaction (percentage; region/scheme/volume dependent).
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - profile
+  - region
+  - method
+- name: fixed_transaction_fee
+  description: Optional fixed per-transaction fee added to the MDR in some markets.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - profile
+  - region
+- name: refunds
+  description: Refunded transactions; may not recover the original processing fee.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - profile
+  - region
+- name: chargebacks
+  description: Disputed transactions incurring chargeback handling costs.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - profile
+  - region
+- name: setup_fee
+  description: One-time onboarding/setup fee where applicable.
+  unit: account
+  aggregation: sum
+  dimensions:
+  - region
+principles:
+- name: Visibility
+  description: Pull transaction, refund and chargeback reports per profile/region from the PayTabs dashboard.
+- name: Allocation
+  description: Tag transactions with cart_id and udf fields to map spend to internal orders/cost centers.
+- name: Optimization
+  description: Negotiate MDR against volume; reduce chargebacks with 3DS2; use the correct region host to avoid FX and failed-auth costs.
+- name: Accountability
+  description: Review effective take-rate (fees / gross volume) per region monthly against forecast.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
