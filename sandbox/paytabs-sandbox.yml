@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://support.paytabs.com/en/support/solutions/articles/60000712315-what-are-the-test-cards-available-to-perform-payments-
+  and the PT2 testing documentation. PayTabs separates test from live at the
+  PROFILE level rather than by key prefix or a separate sandbox host: a merchant
+  creates a dedicated test profile and uses PayTabs test cards against the same
+  region endpoints. Actual test card numbers are published inside the merchant
+  Dashboard (Developers > Testing > Test Cards) and are not reproduced here to
+  avoid fabrication — retrieve them from your own dashboard.
+description: >-
+  The PayTabs PT2 test/sandbox surface: how to exercise payments end-to-end
+  without moving real money.
+mode_separation:
+  mechanism: test profile (not a key prefix, not a separate host)
+  notes: >-
+    A test profile processes PayTabs test cards only and never charges a real
+    card. The same region endpoints (secure.paytabs.com, secure.paytabs.sa, ...)
+    serve both test and live profiles; which profile_id + server key you use
+    decides the mode.
+test_cards:
+  location: Merchant Dashboard > Developers > Testing > Test Cards
+  brands: [Visa, Mastercard]
+  notes: >-
+    PayTabs publishes success and rejection test cards per acquirer inside the
+    dashboard. Test cards simulate authorized and declined outcomes and can
+    exercise 3-D Secure (OTP). Card numbers are account/region-specific — read
+    them from the dashboard; they are intentionally not hardcoded here.
+threed_secure:
+  testable: true
+  notes: Test cards trigger the 3DS OTP flow; a wrong/cancelled OTP yields response code 310 (rejected) or 345 (not completed).
+decline_simulation:
+  reference: errors/paytabs-decline-codes.yml
+  notes: Use the dashboard rejection test cards to reproduce declines (e.g. insufficient funds → 316, not authorised → 300).
+docs:
+- https://support.paytabs.com/en/support/solutions/articles/60000712315-what-are-the-test-cards-available-to-perform-payments-
+- https://docs.paytabs.com/

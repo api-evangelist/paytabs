@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: derived
+source: >-
+  Derived from openapi/paytabs-openapi.yml (PaymentRequest / QueryRequest /
+  PaymentResponse schemas and their id-reference fields) and the PayTabs PT2
+  documentation object model. PayTabs exposes a deliberately small, flat entity
+  set: a Profile owns Transactions, which reference a Cart, optionally a saved
+  card Token, and Customer details. Invoices/PayLinks are Transactions created
+  with invoice fields.
+docs: https://docs.paytabs.com/
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name (via); direction is from the entity that owns the reference.
+entities:
+- {name: Profile, id_field: profile_id, domain: account, description: The PayTabs merchant profile that owns transactions; region-scoped and paired with a server key.}
+- {name: Transaction, id_field: tran_ref, domain: payments, description: A single payment or follow-up action (sale/auth/capture/void/release/refund/register) selected by tran_type.}
+- {name: Cart, id_field: cart_id, domain: payments, description: The merchant order/cart a transaction is for; also the natural idempotency key.}
+- {name: Token, id_field: token, domain: payments, description: A saved-card token created by tokenise/register, reused for recurring/repeat billing.}
+- {name: Customer, id_field: null, domain: payments, description: Buyer name/email/phone/billing/shipping (customer_details / shipping_details) attached to a transaction.}
+- {name: Invoice, id_field: cart_id, domain: invoicing, description: A payable invoice / PayLink — a Transaction created with invoice fields, downloadable as PDF or sent via SMS.}
+relationships:
+- {from: Profile, to: Transaction, kind: has_many, via: profile_id}
+- {from: Transaction, to: Cart, kind: belongs_to, via: cart_id}
+- {from: Transaction, to: Customer, kind: has_one, via: customer_details}
+- {from: Transaction, to: Token, kind: has_one, via: token}
+- {from: Transaction, to: Transaction, kind: belongs_to, via: tran_ref, note: follow-up actions (capture/void/release/refund) reference a prior transaction}
+- {from: Token, to: Transaction, kind: has_many, via: token, note: recurring/repeat charges reuse the token}
+- {from: Invoice, to: Cart, kind: belongs_to, via: cart_id}

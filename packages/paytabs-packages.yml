@@ -1,0 +1,53 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://github.com/paytabscom and the public package registries. PayTabs
+  publishes first-party PT2 client libraries and mobile SDKs from the paytabscom
+  GitHub organization. Only the Node.js package is distributed through a public
+  language registry (npm as `paytabs_pt2`, latest 2.0.12 verified via
+  registry.npmjs.org); the PHP/Laravel, React Native, Android and iOS SDKs are
+  distributed from GitHub. No first-party Python or .NET SDK was located.
+packages:
+- language: javascript
+  registry: npm
+  name: paytabs_pt2
+  url: https://www.npmjs.com/package/paytabs_pt2
+  source: https://github.com/paytabscom/paytabs-nodejs-package
+  install: npm install paytabs_pt2
+  official: true
+- language: php
+  registry: github
+  name: paytabs-php-laravel-package
+  url: https://github.com/paytabscom/paytabs-php-laravel-package
+  source: https://github.com/paytabscom/paytabs-php-laravel-package
+  install: composer require paytabscom/laravel-paytabs
+  official: true
+  note: Laravel package for PayTabs PT2 (Laravel 5.8-10.x). Installed via Composer VCS/Packagist.
+- language: php
+  registry: github
+  name: paytabs-woocommerce
+  url: https://github.com/paytabscom/paytabs-woocommerce
+  source: https://github.com/paytabscom/paytabs-woocommerce
+  official: true
+  note: Official WooCommerce (WordPress) payment plugin.
+- language: javascript
+  registry: github
+  name: react-native-paytabs-library
+  url: https://github.com/paytabscom/react-native-paytabs-library
+  source: https://github.com/paytabscom/react-native-paytabs-library
+  official: true
+  note: React Native bridge for the PT2 mobile SDK (PT2 branch).
+- language: kotlin
+  registry: github
+  name: paytabs-android-library-sample
+  url: https://github.com/paytabscom/paytabs-android-library-sample
+  source: https://github.com/paytabscom/paytabs-android-library-sample
+  official: true
+  note: Android SDK (.aar) distributed as a sample/library repo, PT2 branch.
+- language: swift
+  registry: github
+  name: paytabs-ios-library-sample
+  url: https://github.com/paytabscom/paytabs-ios-library-sample
+  source: https://github.com/paytabscom/paytabs-ios-library-sample
+  official: true
+  note: iOS SDK (.framework + resources bundle) with Objective-C and Swift samples.

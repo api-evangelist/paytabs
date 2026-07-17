@@ -1,0 +1,100 @@
+asyncapi: 2.6.0
+info:
+  title: PayTabs IPN / Callback Notifications
+  version: '2.0'
+  description: >-
+    PayTabs delivers transaction outcomes to merchants via server-to-server HTTP
+    POST notifications. There are two flavors of the same payload: the Callback
+    (a one-time notification whose URL is passed per payment request in the
+    `callback` field) and the IPN (Instant Payment Notification, configured once
+    in the merchant Dashboard under Developers > Payment Notification). The
+    notification is sent once the payment reaches a terminal state (paid,
+    failed, or cancelled) regardless of buyer action. Each request carries a
+    custom `Signature` header — the HMAC SHA-256 of the entire request body keyed
+    by the Profile ServerKey — which the merchant recomputes to verify
+    authenticity. The IPN target MUST be HTTPS or the body is delivered empty.
+    PayTabs retries up to 5 times with increasing delay until it receives a
+    200 OK.
+  x-provenance: >-
+    Modeled from PayTabs support documentation (IPN configuration, callback URL,
+    handle-the-payment-response). PayTabs does not publish a first-party AsyncAPI
+    document; this captures the documented webhook surface.
+externalDocs:
+  description: PayTabs IPN configuration
+  url: https://support.paytabs.com/en/support/solutions/articles/60000710069-how-to-configure-instant-payment-notification-ipn-
+defaultContentType: application/json
+servers:
+  merchant-endpoint:
+    url: https://merchant.example.com
+    protocol: https
+    description: >-
+      The merchant's HTTPS listener. Configured per-request via the `callback`
+      field (Callback) or once in the Dashboard (IPN). Must return 200 OK.
+channels:
+  transaction.notification:
+    description: >-
+      Terminal transaction outcome for a payment, refund, capture, void or
+      release. Delivered as an HTTP POST to the merchant callback/IPN URL.
+    subscribe:
+      operationId: onTransactionNotification
+      bindings:
+        http:
+          type: request
+          method: POST
+        x-signature:
+          header: Signature
+          algorithm: HMAC-SHA256
+          keyed_by: Profile ServerKey
+          computed_over: entire raw request body
+      message:
+        $ref: '#/components/messages/TransactionNotification'
+components:
+  messages:
+    TransactionNotification:
+      name: TransactionNotification
+      title: Transaction notification
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          Signature:
+            type: string
+            description: HMAC SHA-256 of the raw request body, keyed by the Profile ServerKey.
+      payload:
+        type: object
+        properties:
+          tran_ref:
+            type: string
+            description: PayTabs transaction reference.
+          tran_type:
+            type: string
+            description: sale | auth | capture | void | release | refund | register
+          cart_id:
+            type: string
+          cart_amount:
+            type: string
+          cart_currency:
+            type: string
+          customer_details:
+            type: object
+          payment_result:
+            type: object
+            properties:
+              response_status:
+                type: string
+                description: A | H | P | V | E | D | X | C
+              response_code:
+                type: string
+              response_message:
+                type: string
+              transaction_time:
+                type: string
+          payment_info:
+            type: object
+            properties:
+              payment_method:
+                type: string
+              card_type:
+                type: string
+              card_scheme:
+                type: string

@@ -1,0 +1,43 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://support.paytabs.com/en/support/solutions/articles/60000711358-what-is-response-code-vs-the-response-status-
+  and the PT2 Response Parameters folder
+  (support.paytabs.com/en/support/solutions/folders/60000492863). PayTabs carries
+  the decline/result reason in payment_result.response_code, paired with a
+  single-letter payment_result.response_status. Codes are for the merchant's
+  internal use and should NOT be shown to customers. This captures the documented
+  representative codes; the live support table is the source of truth.
+docs: https://support.paytabs.com/en/support/solutions/articles/60000711358-what-is-response-code-vs-the-response-status-
+envelope_field: payment_result.response_code
+status_field: payment_result.response_status
+status_values:
+- {status: A, meaning: Authorised}
+- {status: H, meaning: Hold — authorised but held for anti-fraud review}
+- {status: P, meaning: Pending (e.g. for refunds)}
+- {status: V, meaning: Voided}
+- {status: E, meaning: Error}
+- {status: D, meaning: Declined}
+- {status: X, meaning: Expired}
+- {status: C, meaning: Cancelled}
+buyer_masking: >-
+  Decline reasons (response_code) are documented as merchant-internal and must
+  not be surfaced to customers; show a generic failure message to the buyer.
+decline_codes:
+- {code: '1', status: E, meaning: Authentication failed, action: Check server key / profile_id and region host.}
+- {code: '2', status: E, meaning: Invalid request, action: Fix malformed payload or invalid data types.}
+- {code: '4', status: E, meaning: Duplicate request (same transaction within ~2 minutes), action: Reconcile via /payment/query on the same cart_id before retrying.}
+- {code: '200', status: E, meaning: Invalid card number, action: Ask the customer to re-enter the card.}
+- {code: '206', status: D, meaning: Currency mismatch (follow-up currency differs from original), action: Use the original transaction currency.}
+- {code: '300', status: D, meaning: Not authorised (declined, no specific reason), action: Customer contacts issuer or uses another card.}
+- {code: '310', status: D, meaning: 3D Secure authentication rejected (wrong OTP or user cancelled), action: Retry 3DS.}
+- {code: '316', status: D, meaning: Insufficient funds, action: Customer uses another card/method.}
+- {code: '321', status: C, meaning: Cancelled by the customer, action: None — buyer abandoned.}
+- {code: '345', status: D, meaning: 3D Secure authentication not completed (connection error during 3DS), action: Retry the payment.}
+- {code: '400', status: E, meaning: Internal system error (temporary), action: Retry with backoff; contact support if it persists.}
+- {code: '501', status: D, meaning: Fraud report — issuer flagged the card, action: Do not retry; present a generic decline.}
+- {code: '600', status: P, meaning: Pending — awaiting finalisation, action: Poll /payment/query until a terminal status.}
+notes: >-
+  The published table contains 60+ additional codes. Ranges observed: 1-4
+  request/auth errors, 200-2xx card/validation, 300-3xx decline/3DS, 400 system,
+  5xx fraud, 6xx pending. Confirm the full list against the live support portal.

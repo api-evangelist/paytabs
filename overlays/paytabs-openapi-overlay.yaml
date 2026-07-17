@@ -1,0 +1,49 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for PayTabs PT2 API
+  version: 1.0.0
+extends: openapi/paytabs-openapi.yml
+generated: '2026-07-17'
+method: generated
+source: openapi/paytabs-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      catalog: https://apis.io/paytabs
+      provider: PayTabs
+      maintainer: Kin Lane <kin@apievangelist.com>
+      artifacts:
+      - apis.yml
+      - authentication/paytabs-authentication.yml
+      - conventions/paytabs-conventions.yml
+      - conformance/paytabs-conformance.yml
+      - errors/paytabs-problem-types.yml
+      - errors/paytabs-decline-codes.yml
+      - lifecycle/paytabs-lifecycle.yml
+      - data-model/paytabs-data-model.yml
+      - asyncapi/paytabs-webhooks-asyncapi.yml
+      - sandbox/paytabs-sandbox.yml
+      - packages/paytabs-packages.yml
+      - mcp/paytabs-mcp.yml
+      - skills/_index.yml
+      - agentic-access/paytabs-agentic-access.yml
+- target: $.info
+  update:
+    x-payments-notes: >-
+      Region-scoped hosts: a merchant server key must be used against the host
+      matching its profile region or authentication fails (401). cart_id acts as
+      the idempotency key (duplicate window ~2 minutes). Terminal outcomes are
+      delivered via HMAC-SHA256-signed IPN/callback notifications.
+- target: $.paths./payment/request.post
+  update:
+    x-idempotency:
+      key: cart_id
+      window: ~2 minutes
+      duplicate_response_code: 4
+    x-consequence: money-movement (require human-in-the-loop; see agentic-access)
+- target: $.paths./payment/query.post
+  update:
+    x-usage: >-
+      Reconcile before retrying a payment — query by cart_id or tran_ref to check
+      the current state and avoid a duplicate charge.

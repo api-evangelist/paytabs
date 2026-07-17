@@ -165,6 +165,62 @@ common:
   url: finops/paytabs-finops.yml
 - url: https://paytabs.com/news/
   type: Blog
+- type: DeveloperPortal
+  url: https://docs.paytabs.com/
+- type: GettingStarted
+  url: https://docs.paytabs.com/PT2-API-Endpoints/Introduction/
+- type: APIReference
+  url: https://documenter.getpostman.com/view/14575178/TWDRtfWG
+- type: Postman
+  url: https://documenter.getpostman.com/view/14575178/TWDRtfWG
+- type: Support
+  url: https://support.paytabs.com/en/support/home
+- type: Pricing
+  url: https://paytabs.com/en/pricing/
+- type: SignUp
+  url: https://merchant.paytabs.com/merchant/register
+- type: TermsOfService
+  url: https://ai.paytabs.com/en/terms-of-use/
+- type: PrivacyPolicy
+  url: https://ai.paytabs.com/en/privacy-policy/
+- type: StatusPage
+  url: https://status.paytabs.com/
+- type: Security
+  url: https://ai.paytabs.com/en/security-compliance/
+- type: Compliance
+  url: https://ai.paytabs.com/en/security-compliance/
+- type: Packages
+  url: packages/paytabs-packages.yml
+- type: SDKs
+  url: packages/paytabs-packages.yml
+- type: MCPServer
+  url: mcp/paytabs-mcp.yml
+- type: LLMsTxt
+  url: llms/paytabs-llms.txt
+- type: Overlay
+  url: overlays/paytabs-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/paytabs-conformance.yml
+- type: ErrorCatalog
+  url: errors/paytabs-problem-types.yml
+- type: DeclineCodes
+  url: errors/paytabs-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/paytabs-lifecycle.yml
+- type: Conventions
+  url: conventions/paytabs-conventions.yml
+- type: Idempotency
+  url: conventions/paytabs-conventions.yml
+- type: DataModel
+  url: data-model/paytabs-data-model.yml
+- type: AsyncAPI
+  url: asyncapi/paytabs-webhooks-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/paytabs-webhooks-asyncapi.yml
+- type: Sandbox
+  url: sandbox/paytabs-sandbox.yml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

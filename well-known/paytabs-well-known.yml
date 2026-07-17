@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the PayTabs website,
+  technical portal and the primary PT2 region hosts. Every probed path returned
+  HTTP 404 (no security.txt, OIDC discovery, OAuth authorization-server metadata,
+  api-catalog or ai-plugin). Recorded for auditability; no WellKnown/SecurityTxt
+  pointer is emitted because nothing was found. PayTabs auth is a static merchant
+  server key (no OAuth/OIDC), consistent with the absence of discovery documents.
+hosts:
+- host: https://secure.paytabs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://secure.paytabs.sa
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://paytabs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://docs.paytabs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}

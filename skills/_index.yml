@@ -1,0 +1,22 @@
+generated: '2026-07-17'
+method: generated
+source: >-
+  Packaged Agent Skills generated from openapi/paytabs-openapi.yml. Every step is
+  grounded in an operationId verified verbatim in the spec (createPaymentRequest,
+  queryTransaction); cross-cutting rules cite conventions/paytabs-conventions.yml,
+  errors/paytabs-decline-codes.yml, authentication/paytabs-authentication.yml and
+  sandbox/paytabs-sandbox.yml. No provider-published Agent Skills / AGENTS.md were
+  found.
+skills:
+- file: paytabs-accept-hosted-payment.md
+  name: Accept a hosted-page payment
+  api: openapi/paytabs-openapi.yml
+  operations: [createPaymentRequest, queryTransaction]
+- file: paytabs-query-and-refund.md
+  name: Query a transaction and refund it
+  api: openapi/paytabs-openapi.yml
+  operations: [queryTransaction, createPaymentRequest]
+- file: paytabs-tokenize-and-recurring-charge.md
+  name: Tokenize a card and charge it recurringly
+  api: openapi/paytabs-openapi.yml
+  operations: [createPaymentRequest]

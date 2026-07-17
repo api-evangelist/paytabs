@@ -1,0 +1,59 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.paytabs.com/ and the PayTabs support portal (response parameters,
+  IPN/callback, duplicate-request behavior) plus derivation from
+  openapi/paytabs-openapi.yml. Captures the cross-cutting request/response
+  semantics of the PT2 REST API that OpenAPI does not fully express.
+description: >-
+  How the PayTabs PT2 API behaves across its operations: a small, uniform surface
+  (POST /payment/request, POST /payment/query) authenticated with a merchant
+  server key, region-scoped hosts, cart_id-based duplicate protection, and
+  HMAC-signed IPN/callback notifications.
+base_url: https://secure.paytabs.com
+region_hosts: >-
+  Region-specific: secure.paytabs.com (UAE/default), secure.paytabs.sa (KSA),
+  secure-egypt/-oman/-jordan/-kuwait/-iraq/-morocco/-doha, secure-global. A key
+  must be used against the host matching its profile region or auth fails (401).
+api_style: REST over HTTPS, JSON request and response bodies.
+authentication:
+  scheme: apiKey — merchant server key sent as the raw `authorization` header value (not Bearer)
+  client_side: separate browser client key for own-form / tokenization
+  detail: authentication/paytabs-authentication.yml
+idempotency:
+  supported: true
+  mechanism: >-
+    Merchant-supplied `cart_id` acts as the idempotency key. An identical request
+    for the same cart_id within roughly a 2-minute window is rejected as a
+    duplicate (response code 4), preventing double charges.
+  header: none (no Idempotency-Key header)
+  retention: ~2 minutes duplicate window
+  safe_retry: >-
+    Before retrying /payment/request, call /payment/query with the same cart_id
+    (or tran_ref) to reconcile state and avoid a duplicate charge.
+  docs: https://support.paytabs.com/en/support/solutions/folders/60000492863
+pagination:
+  supported: false
+  notes: No list pagination. /payment/query by cart_id returns an inline array of the cart's transactions; by tran_ref returns a single object.
+request_tracing:
+  transaction_ref: tran_ref (PayTabs-assigned) and cart_id (merchant-assigned) identify a transaction across request, query and IPN.
+metadata:
+  supported: true
+  mechanism: user_defined object with up to nine merchant fields (udf1..udf9).
+versioning:
+  scheme: named-generation (PT2)
+  detail: lifecycle/paytabs-lifecycle.yml
+error_envelope:
+  transport: HTTP 400 (validation) / 401 (auth)
+  business_result: payment_result { response_status, response_code, response_message, transaction_time }
+  detail: errors/paytabs-problem-types.yml
+  decline_codes: errors/paytabs-decline-codes.yml
+webhooks:
+  ipn_and_callback: true
+  signature: Custom `Signature` header — HMAC SHA-256 of the whole request body keyed by the Profile ServerKey.
+  https_required: true (non-HTTPS IPN targets receive an empty body)
+  retries: up to 5 attempts with increasing delay until a 200 OK is returned
+  detail: asyncapi/paytabs-webhooks-asyncapi.yml
+rate_limit_signaling:
+  documented: false
+  detail: rate-limits/paytabs-rate-limits.yml

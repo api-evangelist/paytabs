@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.paytabs.com/ (PT2 API manuals), https://status.paytabs.com/
+  (Better Stack status page), and the support portal. PayTabs runs the versioned
+  "PT2" REST API (its second-generation surface, superseding the legacy PT1
+  "classic" API). No RFC 8594 Sunset/Deprecation response headers and no dated
+  public changelog were located.
+versioning:
+  scheme: named-generation (PT2)
+  current: PT2
+  predecessor: PT1 (classic) — legacy, new integrations use PT2
+  mechanism: Distinct PT2 endpoints/hosts; no per-request version header.
+  docs: https://docs.paytabs.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    PT1 (classic) is the deprecated predecessor generation; PayTabs directs new
+    integrations to PT2. There is no formally published deprecation-policy page
+    or RFC 8594 Sunset header support, so no Deprecation pointer is emitted.
+sla:
+  url: https://status.paytabs.com/
+  public_uptime_target: null
+  notes: >-
+    The status page reports 100% uptime over the trailing 90 days but PayTabs
+    does not publish a numeric contractual uptime SLA for standard merchants.
+status_page: https://status.paytabs.com/
+status_provider: Better Stack
+status_components:
+  - PayTabs Global (GCC, Levant, North Africa) — Payment Gateway, Merchant Dashboard, Plugins, SDKs, APIs, Support
+  - PayTabs KSA
+  - PayTabs Egypt
+rate_limits: rate-limits/paytabs-rate-limits.yml
+deprecated_operations: []

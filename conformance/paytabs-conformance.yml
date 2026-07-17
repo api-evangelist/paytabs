@@ -1,0 +1,67 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  Derived from openapi/paytabs-openapi.yml (securitySchemes, error responses,
+  request/response shapes) and PayTabs published compliance claims at
+  https://ai.paytabs.com/en/security-compliance/ and the support portal. PayTabs
+  is a MENA card acquirer/gateway; conformance is payments-industry rather than
+  general web-API standards.
+standards:
+- id: pci-dss
+  conforms: true
+  evidence: >-
+    PayTabs is certified PCI DSS Level 1 for card processing
+    (ai.paytabs.com/en/security-compliance). Hosted/managed flows reduce merchant
+    PCI scope; own-form raises the merchant SAQ level.
+- id: emv-3ds
+  conforms: true
+  evidence: >-
+    EMV 3-D Secure 2 via Modirum; PayTabs was the first to deploy Modirum EMV 3DS
+    within Saudi Arabia. Response code 310/345 cover 3DS rejection/incompletion.
+- id: mada-scheme
+  conforms: true
+  evidence: Certified for the Saudi national payment scheme (mada); also supports Meeza, KNET, OmanNet, Benefit, STC Pay, urpay.
+- id: apple-google-samsung-pay
+  conforms: true
+  evidence: Wallet acceptance (Apple Pay, Google Pay, Samsung Pay) documented in the PT2 payment_methods surface.
+- id: webhook-signing
+  conforms: true
+  evidence: >-
+    IPN/callback payloads carry a custom `Signature` header — HMAC SHA-256 of the
+    whole request body keyed by the Profile ServerKey
+    (support.paytabs.com IPN configuration).
+- id: apikey-auth
+  conforms: true
+  evidence: openapi securityScheme serverKey (apiKey in `authorization` header); browser-side client key for own-form.
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2 flows; server-to-server auth is a static merchant server key.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any region host (all 404).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are not application/problem+json; failures surface in the
+    payment_result envelope (response_status/response_code/response_message) and
+    top-level HTTP 400/401. See errors/paytabs-problem-types.yml.
+- id: idempotency
+  conforms: partial
+  evidence: >-
+    No Idempotency-Key header; duplicate protection is keyed on merchant cart_id
+    (identical request within ~2 minutes is rejected, response code 4). See
+    conventions/paytabs-conventions.yml.
+- id: pagination
+  conforms: false
+  evidence: No list pagination; /payment/query by cart_id returns an inline array of transactions.
+- id: fapi
+  conforms: false
+- id: psd2-sca
+  conforms: false
+  evidence: MENA acquirer; 3DS is scheme-driven rather than an EU PSD2 SCA profile.
+- id: scim
+  conforms: false
+- id: fhir-r4
+  conforms: false
+- id: odata
+  conforms: false

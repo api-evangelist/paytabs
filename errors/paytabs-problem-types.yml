@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: derived
+format: paytabs-payment-result
+source: >-
+  Derived from the 4xx responses declared in openapi/paytabs-openapi.yml plus the
+  PayTabs response-status / response-code reference on the support portal. PayTabs
+  does NOT use RFC 9457 application/problem+json. Transport-level failures return
+  HTTP 400/401; business/decline outcomes are carried inside the 200 response
+  `payment_result` object (response_status + response_code + response_message).
+  See errors/paytabs-decline-codes.yml for the full response_code taxonomy.
+envelope:
+  transport_errors: HTTP status 400 / 401 with a plain message.
+  business_result:
+    location: payment_result
+    fields:
+      response_status: A (authorized) | H (hold) | P (pending) | V (voided) | E (error) | D (declined) | X (expired) | C (cancelled)
+      response_code: numeric code — see errors/paytabs-decline-codes.yml
+      response_message: human-readable message
+      transaction_time: ISO timestamp
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Validation error — missing/conflicting parameters (e.g. both tran_ref and cart_id supplied to /payment/query, or missing required cart fields on /payment/request).
+  source_operation: openapi/paytabs-openapi.yml#createPaymentRequest
+  remediation: Check required fields (profile_id, tran_type, tran_class, cart_id, cart_description, cart_currency, cart_amount) and that only one of tran_ref/cart_id is sent to query.
+- status: 401
+  title: Unauthorized
+  meaning: Authentication failed — wrong server key, or the key was used against a region host that does not match its profile.
+  source_operation: openapi/paytabs-openapi.yml#createPaymentRequest
+  remediation: Send the correct merchant server key in the `authorization` header and use the region host matching the profile (e.g. secure.paytabs.sa for KSA).
+- status: 200
+  title: Declined / Error (in-body)
+  meaning: The HTTP call succeeded but the transaction did not authorize; inspect payment_result.response_status (D/E) and response_code.
+  source_operation: openapi/paytabs-openapi.yml#createPaymentRequest
+  remediation: Map response_code via errors/paytabs-decline-codes.yml; do not show the raw decline reason to the buyer.
