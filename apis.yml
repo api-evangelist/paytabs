@@ -8,7 +8,20 @@ description: PayTabs is a Saudi-built payment orchestration and gateway provider
   and Samsung Pay through hosted, managed and own-form flows, with tokenization,
   recurring billing and invoicing. The API is served on region-specific hosts and
   authenticated with a merchant server key.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paytabs.png
 tags:
 - Payments
 - Payment Gateway
@@ -21,124 +34,61 @@ created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.19'
 apis:
-- aid: paytabs:paytabs-hosted-payment-page-api
-  name: PayTabs Hosted Payment Page API
+- aid: paytabs:paytabs-payments-api
+  name: PayTabs Payments API
+  description: Create and manage transactions.
+  humanURL: >-
+    https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/
+  baseURL: https://secure.paytabs.com
   tags:
   - Payments
-  - Hosted Payment Page
-  - Redirect
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/
-  baseURL: https://secure.paytabs.com
   properties:
-  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
-    type: Documentation
-  - url: https://documenter.getpostman.com/view/14575178/TWDRtfWG
-    type: APIReference
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Creates a transaction via POST /payment/request and returns a
-    hosted redirect_url where the customer completes payment on PayTabs-hosted,
-    PCI-scope-reducing pages. Supports cards, mada, Apple/Google/Samsung Pay and
-    local methods, with callback (IPN) and return URLs.
-- aid: paytabs:paytabs-managed-form-api
-  name: PayTabs Managed Form API
-  tags:
-  - Payments
-  - Managed Form
-  - iFrame
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paytabs.com/PT2-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-2-Configure-Integration-Method/HPP-Step-2-Landing/
+  - type: OpenAPI
+    url: openapi/paytabs-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
+  - type: APIReference
+    url: https://documenter.getpostman.com/view/14575178/TWDRtfWG
+  - type: PostmanCollection
+    url: collections/paytabs.postman_collection.json
+  - type: Documentation
+    url: >-
+      https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/
+  - type: Documentation
+    url: >-
+      https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/
+  - type: Documentation
+    url: >-
+      https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf
+- aid: paytabs:paytabs-transactions-api
+  name: PayTabs Transactions API
+  description: Query and manage existing transactions.
+  humanURL: >-
+    https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/
   baseURL: https://secure.paytabs.com
-  properties:
-  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
-    type: Documentation
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Same POST /payment/request flow rendered inside a merchant-page
-    iframe (framed=true) so the checkout is embedded while card capture stays in
-    PayTabs' PCI scope.
-- aid: paytabs:paytabs-own-form-api
-  name: PayTabs Own Form API
-  tags:
-  - Payments
-  - Own Form
-  - Tokenization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Own-Form/Own-Form-Step-5-handle-the-payment-response/Own-Form-Step-5-Landing/
-  baseURL: https://secure.paytabs.com
-  properties:
-  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
-    type: Documentation
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Merchant-branded checkout that collects card data on the merchant
-    page (client key) and submits to POST /payment/request, requiring a higher
-    PCI SAQ level than the hosted flows.
-- aid: paytabs:paytabs-transaction-management-api
-  name: PayTabs Transaction Management API
   tags:
   - Transactions
-  - Query
-  - Refund
-  - Capture
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/
-  baseURL: https://secure.paytabs.com
   properties:
-  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/
-    type: Documentation
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Reads transaction state via POST /payment/query (by tran_ref or
-    cart_id) and performs follow-up actions - capture, void, release and refund -
-    via POST /payment/request with the matching tran_type.
-- aid: paytabs:paytabs-token-recurring-api
-  name: PayTabs Token & Recurring Billing API
-  tags:
-  - Tokenization
-  - Recurring
-  - Repeat Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/
-  baseURL: https://secure.paytabs.com
-  properties:
-  - url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/
-    type: Documentation
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Saves a card token (tokenise/register) then charges it for
-    unattended recurring or repeat-billing payments via POST /payment/request
-    with tran_class=recurring and the stored token.
-- aid: paytabs:paytabs-invoices-api
-  name: PayTabs Invoices API
-  tags:
-  - Invoices
-  - Payment Links
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf
-  baseURL: https://secure.paytabs.com
-  properties:
-  - url: https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf
-    type: Documentation
-  - url: openapi/paytabs-openapi.yml
-    type: OpenAPI
-  - url: collections/paytabs.postman_collection.json
-    type: PostmanCollection
-  description: Generates payable invoices / payment links over POST /payment/request
-    with invoice fields, deliverable to customers and downloadable as PDF or sent
-    via SMS.
+  - type: OpenAPI
+    url: openapi/paytabs-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/
+  - type: APIReference
+    url: https://documenter.getpostman.com/view/14575178/TWDRtfWG
+  - type: PostmanCollection
+    url: collections/paytabs.postman_collection.json
+  - type: Documentation
+    url: >-
+      https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/
+  - type: Documentation
+    url: >-
+      https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/
+  - type: Documentation
+    url: >-
+      https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/paytabs/overview
 - type: AgenticAccess
   url: agentic-access/paytabs-agentic-access.yml
 - type: TrustCenter
