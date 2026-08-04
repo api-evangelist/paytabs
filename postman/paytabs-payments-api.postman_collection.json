@@ -1,0 +1,257 @@
+{
+  "info": {
+    "_postman_id": "bf1b48f2-09fc-45e7-923f-7f6346017ef9",
+    "name": "PayTabs PT2 Payments API",
+    "description": "PayTabs PT2 REST API for MENA payment acceptance. A small, uniform surface: POST /payment/request creates and manages transactions (hosted payment page, managed/own form, invoices, tokenized and recurring charges, and follow-up capture / void / release / refund actions selected via tran_type), and POST /payment/query reads transaction status by tran_ref or cart_id. Requests are JSON; the merchant server key is sent in the `authorization` header and the profile is identified by `profile_id` in the body.\n\nContact Support:\n Name: PayTabs Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:28.000Z",
+    "updatedAt": "2026-07-28T02:33:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bf1b48f2-09fc-45e7-923f-7f6346017ef9"
+  },
+  "item": [
+    {
+      "name": "payment",
+      "item": [
+        {
+          "name": "request",
+          "item": [
+            {
+              "name": "Create or act on a transaction",
+              "id": "139ed0b6-0c73-4480-9e2d-6c134e652be3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"void\",\n  \"tran_class\": \"moto\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment/request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment",
+                    "request"
+                  ]
+                },
+                "description": "Creates a transaction. The `tran_type` field selects the action - `sale` or `auth` initiate a new payment (returning a hosted `redirect_url` for HPP/managed/own-form flows, or authorizing a stored `token`), while `capture`, `void`, `release`, `refund` and `register` act on a prior transaction referenced by `tran_ref`. Invoice and recurring flows reuse the same endpoint with additional fields."
+              },
+              "response": [
+                {
+                  "id": "cfb5822b-6c2b-45f1-9428-86b921d6f369",
+                  "name": "Transaction created or actioned.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"void\",\n  \"tran_class\": \"moto\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "request"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tran_ref\": \"<string>\",\n  \"tran_type\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"payment_result\": {\n    \"response_status\": \"<string>\",\n    \"response_code\": \"<string>\",\n    \"response_message\": \"<string>\",\n    \"transaction_time\": \"<string>\"\n  },\n  \"payment_info\": {\n    \"payment_method\": \"<string>\",\n    \"card_type\": \"<string>\",\n    \"card_scheme\": \"<string>\",\n    \"payment_description\": \"<string>\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:33:29.000Z",
+                  "updatedAt": "2026-07-28T02:33:29.000Z",
+                  "uid": "35240-cfb5822b-6c2b-45f1-9428-86b921d6f369"
+                },
+                {
+                  "id": "7a2e3fd3-0bc8-4ae5-9e33-2a8d39270148",
+                  "name": "Validation error (missing or conflicting parameters).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"void\",\n  \"tran_class\": \"moto\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "request"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:33:29.000Z",
+                  "updatedAt": "2026-07-28T02:33:29.000Z",
+                  "uid": "35240-7a2e3fd3-0bc8-4ae5-9e33-2a8d39270148"
+                },
+                {
+                  "id": "1df9d92d-33ff-4822-871c-a398c8e71322",
+                  "name": "Authentication failed (wrong server key or region host).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"void\",\n  \"tran_class\": \"moto\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "request"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:33:29.000Z",
+                  "updatedAt": "2026-07-28T02:33:29.000Z",
+                  "uid": "35240-1df9d92d-33ff-4822-871c-a398c8e71322"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:29.000Z",
+              "updatedAt": "2026-07-28T02:33:29.000Z",
+              "uid": "35240-139ed0b6-0c73-4480-9e2d-6c134e652be3"
+            }
+          ],
+          "id": "d9772156-8b5a-437d-8881-1c8dde5aa673",
+          "createdAt": "2026-07-28T02:33:29.000Z",
+          "updatedAt": "2026-07-28T02:33:29.000Z",
+          "uid": "35240-d9772156-8b5a-437d-8881-1c8dde5aa673"
+        }
+      ],
+      "id": "d6fee439-c032-4798-bfcc-d4ecb5f940af",
+      "createdAt": "2026-07-28T02:33:29.000Z",
+      "updatedAt": "2026-07-28T02:33:29.000Z",
+      "uid": "35240-d6fee439-c032-4798-bfcc-d4ecb5f940af"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://secure.paytabs.com"
+    }
+  ]
+}

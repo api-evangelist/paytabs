@@ -1,0 +1,257 @@
+{
+  "info": {
+    "_postman_id": "b3e7b03c-366b-4c9c-8304-e13022733ac8",
+    "name": "PayTabs PT2 Payments Transactions API",
+    "description": "PayTabs PT2 REST API for MENA payment acceptance. A small, uniform surface: POST /payment/request creates and manages transactions (hosted payment page, managed/own form, invoices, tokenized and recurring charges, and follow-up capture / void / release / refund actions selected via tran_type), and POST /payment/query reads transaction status by tran_ref or cart_id. Requests are JSON; the merchant server key is sent in the `authorization` header and the profile is identified by `profile_id` in the body.\n\nContact Support:\n Name: PayTabs Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:29.000Z",
+    "updatedAt": "2026-07-28T02:33:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b3e7b03c-366b-4c9c-8304-e13022733ac8"
+  },
+  "item": [
+    {
+      "name": "payment",
+      "item": [
+        {
+          "name": "query",
+          "item": [
+            {
+              "name": "Query a transaction",
+              "id": "a47967f8-cd62-4aa6-b78b-2baefa01eb82",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_ref\": \"<string>\",\n  \"cart_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment/query",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment",
+                    "query"
+                  ]
+                },
+                "description": "Returns the current state of a transaction. Provide `profile_id` plus exactly one of `tran_ref` (single transaction) or `cart_id` (array of transactions for that cart). Only one of `tran_ref` or `cart_id` may be set or a 400 is returned."
+              },
+              "response": [
+                {
+                  "id": "8878720e-d98f-4236-ae1d-4cb42d9291ce",
+                  "name": "Transaction detail (object) or list (array for cart_id).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_ref\": \"<string>\",\n  \"cart_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/query",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "query"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tran_ref\": \"<string>\",\n  \"tran_type\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"payment_result\": {\n    \"response_status\": \"<string>\",\n    \"response_code\": \"<string>\",\n    \"response_message\": \"<string>\",\n    \"transaction_time\": \"<string>\"\n  },\n  \"payment_info\": {\n    \"payment_method\": \"<string>\",\n    \"card_type\": \"<string>\",\n    \"card_scheme\": \"<string>\",\n    \"payment_description\": \"<string>\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:33:30.000Z",
+                  "updatedAt": "2026-07-28T02:33:30.000Z",
+                  "uid": "35240-8878720e-d98f-4236-ae1d-4cb42d9291ce"
+                },
+                {
+                  "id": "31535ec7-7a7c-470e-a398-5b1d110643b8",
+                  "name": "Both tran_ref and cart_id supplied, or neither.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_ref\": \"<string>\",\n  \"cart_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/query",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "query"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:33:30.000Z",
+                  "updatedAt": "2026-07-28T02:33:30.000Z",
+                  "uid": "35240-31535ec7-7a7c-470e-a398-5b1d110643b8"
+                },
+                {
+                  "id": "279721e6-5e48-4aff-b407-e10926c17e7b",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_ref\": \"<string>\",\n  \"cart_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment/query",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment",
+                        "query"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:33:30.000Z",
+                  "updatedAt": "2026-07-28T02:33:30.000Z",
+                  "uid": "35240-279721e6-5e48-4aff-b407-e10926c17e7b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:30.000Z",
+              "updatedAt": "2026-07-28T02:33:30.000Z",
+              "uid": "35240-a47967f8-cd62-4aa6-b78b-2baefa01eb82"
+            }
+          ],
+          "id": "ba79b160-8193-42da-b1ed-c85ded8b20a5",
+          "createdAt": "2026-07-28T02:33:30.000Z",
+          "updatedAt": "2026-07-28T02:33:30.000Z",
+          "uid": "35240-ba79b160-8193-42da-b1ed-c85ded8b20a5"
+        }
+      ],
+      "id": "6c69264a-04e8-43df-b854-e093be047983",
+      "createdAt": "2026-07-28T02:33:30.000Z",
+      "updatedAt": "2026-07-28T02:33:30.000Z",
+      "uid": "35240-6c69264a-04e8-43df-b854-e093be047983"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://secure.paytabs.com"
+    }
+  ]
+}

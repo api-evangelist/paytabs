@@ -1,0 +1,16 @@
+{
+  "provider": "paytabs",
+  "sources": [
+    "paytabs-payments-api-openapi.yml",
+    "paytabs-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "paytabs-payments-api-openapi.yml",
+    "paytabs-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
