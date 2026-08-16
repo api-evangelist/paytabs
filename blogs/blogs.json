@@ -5,7 +5,7 @@
       "source": "https://ai.paytabs.com/en/feed/",
       "feed_url": "https://ai.paytabs.com/en/feed/",
       "title": "",
-      "saved": 0,
+      "saved": 2,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 24,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 26,
+  "fetched": "2026-08-15T12:11:08Z"
 }
