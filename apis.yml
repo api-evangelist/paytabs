@@ -32,7 +32,7 @@ tags:
 - mada
 created: '2026-07-17'
 modified: '2026-07-17'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: paytabs:paytabs-payments-api
   name: PayTabs Payments API
