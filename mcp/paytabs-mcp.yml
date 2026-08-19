@@ -1,13 +1,10 @@
 generated: '2026-07-17'
 method: derived
 status: candidate
-source: >-
-  No official PayTabs hosted/remote MCP server was located (docs.paytabs.com,
-  github.com/paytabscom, npm, MCP registries — none found as of 2026-07-17). This
-  is a CANDIDATE tool list derived one-tool-per-operation from
-  openapi/paytabs-openapi.yml, as a starting point for an MCP server that fronts
-  the PT2 API. Payment operations move real money — see
-  agentic-access/paytabs-agentic-access.yml; the write tool must stay
+source: No official PayTabs hosted/remote MCP server was located (docs.paytabs.com, github.com/paytabscom,
+  npm, MCP registries — none found as of 2026-07-17). This is a CANDIDATE tool list derived one-tool-per-operation
+  from openapi/paytabs-openapi.yml, as a starting point for an MCP server that fronts the PT2 API. Payment
+  operations move real money — see agentic-access/paytabs-agentic-access.yml; the write tool must stay
   human-in-the-loop.
 server:
   name: paytabs
@@ -15,13 +12,17 @@ server:
   url: null
 tools:
 - name: create_payment_request
-  description: >-
-    Create or act on a transaction (sale/auth, or capture/void/release/refund of
-    a prior transaction) via POST /payment/request. HIGH CONSEQUENCE — moves
-    money; require human approval.
+  description: Create or act on a transaction (sale/auth, or capture/void/release/refund of a prior transaction)
+    via POST /payment/request. HIGH CONSEQUENCE — moves money; require human approval.
   source_operation: openapi/paytabs-openapi.yml#createPaymentRequest
   consequence: write
 - name: query_transaction
   description: Read the current state of a transaction by tran_ref or cart_id via POST /payment/query.
   source_operation: openapi/paytabs-openapi.yml#queryTransaction
   consequence: read
+deployment:
+  mode: none
+  verified: derived
+  tools: 2
+  checked: '2026-08-12'
+  source: catalog MCP census

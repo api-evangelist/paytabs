@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayTabs PT2 Payments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or act on a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.paytabs.com/payment/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a transaction. The `tran_type` field selects the action - `sale` or `auth` initiate a new payment (returning a hosted `redirect_url` for HPP/managed/own-form flows, or authorizing a stored `token`), while `capture`, `void`, `release`, `refund` and `register` act on a prior transaction referenced by `tran_ref`. Invoice and recurring flows reuse the same endpoint with additional fields."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

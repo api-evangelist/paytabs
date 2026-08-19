@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "4377b084-4750-4627-bcf9-089b4cb7a1c5",
+      "name": "Payments",
+      "description": {
+        "content": "Create and manage transactions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad560990-fffa-4f17-86f2-07a379abfc91",
+          "name": "Create or act on a transaction",
+          "request": {
+            "name": "Create or act on a transaction",
+            "description": {
+              "content": "Creates a transaction. The `tran_type` field selects the action - `sale` or `auth` initiate a new payment (returning a hosted `redirect_url` for HPP/managed/own-form flows, or authorizing a stored `token`), while `capture`, `void`, `release`, `refund` and `register` act on a prior transaction referenced by `tran_ref`. Invoice and recurring flows reuse the same endpoint with additional fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"<string>\",\n  \"tran_class\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "816f0af0-9e03-4b1b-a8bc-4eb2216ce4dc",
+              "name": "Transaction created or actioned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"<string>\",\n  \"tran_class\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tran_ref\": \"string\",\n  \"tran_type\": \"string\",\n  \"cart_id\": \"string\",\n  \"cart_description\": \"string\",\n  \"cart_currency\": \"string\",\n  \"cart_amount\": \"string\",\n  \"redirect_url\": \"https://glUvYnMdkdwyPWPcGhdeu.nrpGhZv6SMVX\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"payment_result\": {\n    \"response_status\": \"string\",\n    \"response_code\": \"string\",\n    \"response_message\": \"string\",\n    \"transaction_time\": \"string\"\n  },\n  \"payment_info\": {\n    \"payment_method\": \"string\",\n    \"card_type\": \"string\",\n    \"card_scheme\": \"string\",\n    \"payment_description\": \"string\"\n  },\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "671095a5-bda2-4c88-8956-bb00b1b3ae5c",
+              "name": "Validation error (missing or conflicting parameters).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"<string>\",\n  \"tran_class\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "518de4d6-d010-4201-8e8b-abc3ba81ce89",
+              "name": "Authentication failed (wrong server key or region host).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profile_id\": \"<integer>\",\n  \"tran_type\": \"<string>\",\n  \"tran_class\": \"<string>\",\n  \"cart_id\": \"<string>\",\n  \"cart_description\": \"<string>\",\n  \"cart_currency\": \"<string>\",\n  \"cart_amount\": \"<number>\",\n  \"tran_ref\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"return\": \"<uri>\",\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"hide_shipping\": \"<boolean>\",\n  \"payment_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"token\": \"<string>\",\n  \"tokenise\": \"<integer>\",\n  \"show_save_card\": \"<boolean>\",\n  \"config_id\": \"<integer>\",\n  \"card_filter\": \"<string>\",\n  \"framed\": \"<boolean>\",\n  \"user_defined\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.paytabs.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cbb6db95-1b0b-4a2d-9c55-822a5ef9ede0",
+    "name": "PayTabs PT2 Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PayTabs PT2 REST API for MENA payment acceptance. A small, uniform surface: POST /payment/request creates and manages transactions (hosted payment page, managed/own form, invoices, tokenized and recurring charges, and follow-up capture / void / release / refund actions selected via tran_type), and POST /payment/query reads transaction status by tran_ref or cart_id. Requests are JSON; the merchant server key is sent in the `authorization` header and the profile is identified by `profile_id` in the body.\n\nContact Support:\n Name: PayTabs Support",
+      "type": "text/plain"
+    }
+  }
+}

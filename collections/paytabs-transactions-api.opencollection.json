@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayTabs PT2 Payments Transactions API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.paytabs.com/payment/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the current state of a transaction. Provide `profile_id` plus exactly one of `tran_ref` (single transaction) or `cart_id` (array of transactions for that cart). Only one of `tran_ref` or `cart_id` may be set or a 400 is returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
