@@ -8,6 +8,18 @@ description: PayTabs is a Saudi-built payment orchestration and gateway provider
   and Samsung Pay through hosted, managed and own-form flows, with tokenization,
   recurring billing and invoicing. The API is served on region-specific hosts and
   authenticated with a merchant server key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
