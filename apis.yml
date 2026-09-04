@@ -22,16 +22,18 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: enterprise
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Enterprise · Self-serve signup
+  label: Enterprise
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  - sandbox
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paytabs.png
 tags:
@@ -157,8 +159,9 @@ common:
   url: packages/paytabs-packages.yml
 - type: SDKs
   url: packages/paytabs-packages.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/paytabs-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/paytabs-llms.txt
 - type: Overlay
