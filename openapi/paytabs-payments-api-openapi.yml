@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: PayTabs PT2 Payments API
-  description: 'PayTabs PT2 REST API for MENA payment acceptance. A small, uniform surface: POST /payment/request creates and manages transactions (hosted payment page, managed/own form, invoices, tokenized and recurring charges, and follow-up capture / void / release / refund actions selected via tran_type), and POST /payment/query reads transaction status by tran_ref or cart_id. Requests are JSON; the merchant server key is sent in the `authorization` header and the profile is identified by `profile_id` in the body.'
+  description: PayTabs PT2 REST API for MENA payment acceptance.
   termsOfService: https://paytabs.com/en/terms-and-conditions/
   contact:
     name: PayTabs Support
@@ -60,6 +60,29 @@ paths:
           description: Authentication failed (wrong server key or region host).
 components:
   schemas:
+    CustomerDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        street1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code (e.g. SA, AE, EG).
+        zip:
+          type: string
+        ip:
+          type: string
     PaymentResponse:
       type: object
       properties:
@@ -201,29 +224,6 @@ components:
         user_defined:
           type: object
           description: Up to nine merchant fields udf1..udf9.
-    CustomerDetails:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        street1:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code (e.g. SA, AE, EG).
-        zip:
-          type: string
-        ip:
-          type: string
   securitySchemes:
     serverKey:
       type: apiKey

@@ -3,9 +3,9 @@ info:
   title: API Evangelist enhancements for PayTabs PT2 API
   version: 1.0.0
 extends: openapi/paytabs-openapi.yml
-generated: '2026-07-17'
-method: generated
-source: openapi/paytabs-openapi.yml
+x-generated: '2026-07-17'
+x-method: generated
+x-source: openapi/paytabs-openapi.yml
 actions:
 - target: $.info
   update:
