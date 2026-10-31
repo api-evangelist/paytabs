@@ -1,4 +1,4 @@
-# PayTabs (paytabs)
+# PayTabs
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,179 +66,157 @@
 
 PayTabs is a Saudi-built payment orchestration and gateway provider serving merchants across MENA. The PT2 REST API accepts cards and local methods (mada, Meeza, KNET, OmanNet, Benefit, STC Pay, urpay) plus Apple Pay, Google Pay and Samsung Pay through hosted, managed and own-form flows, with tokenization, recurring billing and invoicing. The API is served on region-specific hosts and authenticated with a merchant server key.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/paytabs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/paytabs/refs/heads/main/apis.yml)
+**Areas:** Payments · Payment Gateway · Fintech · MENA · Saudi Arabia · Cards · mada
 
-## Tags
+## PayTabs on APIs.io
 
-- Payments
-- Payment Gateway
-- Fintech
-- MENA
-- Saudi Arabia
-- Cards
-- mada
+Everything profiled for PayTabs is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paytabs/](https://apis.io/providers/paytabs/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-07-17
-- **Modified:** 2026-07-17
+- [PayTabs Payments API](https://apis.io/apis/paytabs/paytabs-payments-api/) — Create and manage transactions.
+- [PayTabs Transactions API](https://apis.io/apis/paytabs/paytabs-transactions-api/) — Query and manage existing transactions.
 
-## Region Hosts
+### Published properties
 
-PayTabs serves the same PT2 endpoints on region-specific hosts. Use the host that matches your profile's region or authentication will fail.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Region | Host |
-| --- | --- |
-| UAE / default | `https://secure.paytabs.com` |
-| Saudi Arabia (KSA) | `https://secure.paytabs.sa` |
-| Egypt | `https://secure-egypt.paytabs.com` |
-| Oman | `https://secure-oman.paytabs.com` |
-| Jordan | `https://secure-jordan.paytabs.com` |
-| Kuwait | `https://secure-kuwait.paytabs.com` |
-| Iraq | `https://secure-iraq.paytabs.com` |
-| Morocco | `https://secure-morocco.paytabs.com` |
-| Qatar | `https://secure-doha.paytabs.com` |
-| Global | `https://secure-global.paytabs.com` |
+#### AsyncAPI (1)
 
-## Authentication
+Event-driven and webhook contracts.
 
-Server-to-server calls send the merchant **server key** as the raw value of the `authorization` HTTP header (not a Bearer token), with `profile_id` in the request body. A separate **client key** is used for browser-side own-form and card tokenization. Keys are obtained from the merchant dashboard under Developers > Key management and are region-scoped.
+- [PayTabs IPN / Callback Notifications](https://apis.io/asyncapis/paytabs/paytabs-webhooks-asyncapi/)
 
-## APIs
+#### Event channels (1)
 
-### PayTabs Hosted Payment Page API
+Individual events and webhooks the provider emits.
 
-Creates a transaction via POST /payment/request and returns a hosted redirect_url where the customer completes payment on PayTabs-hosted, PCI-scope-reducing pages. Supports cards, mada, Apple/Google/Samsung Pay and local methods, with callback (IPN) and return URLs.
+- [transaction.notification](https://apis.io/channels/paytabs/transaction-notification/)
 
-- **Human URL:** [https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/](https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/)
-- **Base URL:** `https://secure.paytabs.com`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Payments
-- Hosted Payment Page
-- Redirect
+- [paytabs](https://apis.io/servers/paytabs/paytabs/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/)
-- [API Reference](https://documenter.getpostman.com/view/14575178/TWDRtfWG)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### PayTabs Managed Form API
+- [Paytabs Agentic Access](https://apis.io/agentic-access/paytabs/paytabs-agentic-access/)
 
-Same POST /payment/request flow rendered inside a merchant-page iframe (framed=true) so the checkout is embedded while card capture stays in PayTabs' PCI scope.
+#### Collections (4)
 
-- **Human URL:** [https://docs.paytabs.com/PT2-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-2-Configure-Integration-Method/HPP-Step-2-Landing/](https://docs.paytabs.com/PT2-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-2-Configure-Integration-Method/HPP-Step-2-Landing/)
-- **Base URL:** `https://secure.paytabs.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [PayTabs PT2 Payments API](https://apis.io/collections/paytabs/open-paytabs-payments-api/)
+- [PayTabs PT2 Payments Transactions API](https://apis.io/collections/paytabs/open-paytabs-transactions-api/)
+- [PayTabs PT2 Payments API](https://apis.io/collections/paytabs/postman-paytabs-payments-api/)
+- [PayTabs PT2 Payments Transactions API](https://apis.io/collections/paytabs/postman-paytabs-transactions-api/)
 
-- Payments
-- Managed Form
-- iFrame
+#### Overlays (1)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Paytabs Openapi Overlay](https://apis.io/overlays/paytabs/paytabs-openapi-overlay/)
 
-### PayTabs Own Form API
+#### Security (4)
 
-Merchant-branded checkout that collects card data on the merchant page (client key) and submits to POST /payment/request, requiring a higher PCI SAQ level than the hosted flows.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Own-Form/Own-Form-Step-5-handle-the-payment-response/Own-Form-Step-5-Landing/](https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Own-Form/Own-Form-Step-5-handle-the-payment-response/Own-Form-Step-5-Landing/)
-- **Base URL:** `https://secure.paytabs.com`
+- [Paytabs Authentication](https://apis.io/security/paytabs/paytabs-authentication/)
+- [Paytabs Domain Security](https://apis.io/security/paytabs/paytabs-domain-security/)
+- [Paytabs Trust Center](https://apis.io/security/paytabs/paytabs-trust-center/)
+- [Paytabs Vulnerability Disclosure](https://apis.io/security/paytabs/paytabs-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Payments
-- Own Form
-- Tokenization
+Published plans, tiers and prices.
 
-#### Properties
+- [Paytabs Plans Pricing](https://apis.io/plans/paytabs/paytabs-plans-pricing/)
 
-- [Documentation](https://docs.paytabs.com/manuals/PT-API-Endpoints/Introduction/)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+#### Rate limits (1)
 
-### PayTabs Transaction Management API
+Published request limits.
 
-Reads transaction state via POST /payment/query (by tran_ref or cart_id) and performs follow-up actions - capture, void, release and refund - via POST /payment/request with the matching tran_type.
+- [Paytabs Rate Limits](https://apis.io/rate-limits/paytabs/paytabs-rate-limits/)
 
-- **Human URL:** [https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/](https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/)
-- **Base URL:** `https://secure.paytabs.com`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Transactions
-- Query
-- Refund
-- Capture
+- [Paytabs Finops](https://apis.io/finops/paytabs/paytabs-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-7-Manage-Transactions/HPP-Step-7-Query-Transaction/)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### PayTabs Token & Recurring Billing API
-
-Saves a card token (tokenise/register) then charges it for unattended recurring or repeat-billing payments via POST /payment/request with tran_class=recurring and the stored token.
-
-- **Human URL:** [https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/](https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/)
-- **Base URL:** `https://secure.paytabs.com`
-
-#### Tags
-
-- Tokenization
-- Recurring
-- Repeat Billing
-
-#### Properties
-
-- [Documentation](https://docs.paytabs.com/manuals/PT-API-Endpoints/Repeat-Billing/Step-1-Understanding-Workflow-&-Prerequisites/Repeat-Billing-Prerequisites/)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayTabs Invoices API
-
-Generates payable invoices / payment links over POST /payment/request with invoice fields, deliverable to customers and downloadable as PDF or sent via SMS.
-
-- **Human URL:** [https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf](https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf)
-- **Base URL:** `https://secure.paytabs.com`
-
-#### Tags
-
-- Invoices
-- Payment Links
-
-#### Properties
-
-- [Documentation](https://support.paytabs.com/en/support/solutions/articles/60000902481-3-2-3-invoices-apis-initiating-the-payment-request-download-invoice-pdf)
-- [OpenAPI](openapi/paytabs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paytabs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/paytabscom)
-- [LinkedIn](https://www.linkedin.com/company/paytabs)
 - [Website](https://paytabs.com/en/)
 - [Documentation](https://docs.paytabs.com/)
-- [Plans](plans/paytabs-plans-pricing.yml)
-- [Rate Limits](rate-limits/paytabs-rate-limits.yml)
-- [Fin Ops](finops/paytabs-finops.yml)
+- [Getting started](https://docs.paytabs.com/PT2-API-Endpoints/Introduction/)
+- [API reference](https://documenter.getpostman.com/view/14575178/TWDRtfWG)
+- [Pricing](https://paytabs.com/en/pricing/)
+- [Sign up](https://merchant.paytabs.com/merchant/register)
+- [Support](https://support.paytabs.com/en/support/home)
+- [Blog](https://paytabs.com/news/)
+- [Security](https://ai.paytabs.com/en/security-compliance/)
+- [Compliance](https://ai.paytabs.com/en/security-compliance/)
+- [Terms of service](https://ai.paytabs.com/en/terms-of-use/)
+- [Privacy policy](https://ai.paytabs.com/en/privacy-policy/)
+- [GitHub](https://github.com/paytabscom)
+- [Status](https://status.paytabs.com/)
 
-## Notes
+## API Evangelist rating
 
-- **Company:** PayTabs Group, founded 2014 in Saudi Arabia (founder/CEO Abdulaziz Fahad Al Jouf), with offices in KSA, UAE and Egypt and presence across MENA, Turkey and India.
-- **Compliance:** PCI DSS Level 1; EMV 3-D Secure 2 via Modirum (first deployed in the Kingdom of Saudi Arabia); certified for the Saudi national scheme (mada).
-- **Async surface:** post-payment updates arrive as an HTTP IPN webhook to the merchant `callback` URL plus a browser `return` redirect. No public WebSocket API (see [review.yml](review.yml)).
-- **Spec provenance:** the OpenAPI is modeled from the PayTabs PT2 documentation and public Postman reference (no first-party OpenAPI is published).
+**Kin Score 58.9** — strong · rubric 0.25.0 · scored 2026-10-23
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 78.0 |
+| Access clarity | 65.8 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 26.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 44.6** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paytabs/](https://apis.io/providers/paytabs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PayTabs: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paytabs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
